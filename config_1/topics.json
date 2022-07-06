@@ -1,0 +1,5 @@
+{
+	"/turtle1/cmd_vel": ["geometry_msgs/Twist",                 "publisher"   ],
+	"/turtle1/pose":    ["std_msgs/Pose",                     "subscriber"    ]
+}
+
