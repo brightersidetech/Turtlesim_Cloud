@@ -48,3 +48,11 @@ catkin_make
 For a detailed tutorial on how to Install FOROS, [visist the website here](https://firos.readthedocs.io/en/latest/install/install.html)
 
 ## Setting up things
+
+```
+python3 src/firos/firos/core.py --conf src/firos/config_1
+```
+
+** This is a bold text **
+_ This is an italics text _
+- This is a bulet

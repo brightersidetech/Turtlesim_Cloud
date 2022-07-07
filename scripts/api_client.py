@@ -3,7 +3,8 @@ import requests
 import json
 import time
 
-server = "http://localhost:1026/v2/op/update"
+server_update = "http://localhost:1026/v2/op/update"
+server_create = "http://localhost:1026/v2/entities"
 
 # get all entities
 def get_status():
@@ -17,37 +18,65 @@ def get_status():
 
 # Create  entity
 def create():
-    data = {"id": "urn:ngsi-ld:Store:004",
-            "type": "Store",
-            "address": {
-                "type": "PostalAddress",
+    data = {"id": ".turtle1.cmd_vel",
+            "type": "geometry_msgs%2FTwist",
+            "angular": {
+                "type": "geometry_msgs%2FVector3",
                 "value": {
-                    "streetAddress": "Bornholmer Straße 65",
-                    "addressRegion": "Berlin",
-                    "addressLocality": "Prenzlauer Berg",
-                    "postalCode": "10439"
+                    "x": {
+                        "value": 0,
+                        "type": "number"
+                    },
+                    "y": {
+                        "value": 0,
+                        "type": "number"
+                    },
+                    "z": {
+                        "value": 1,
+                        "type": "number"
+                    }
                 },
                 "metadata": {
-                    "verified": {
-                        "value": "true",
-                        "type": "Boolean"
+                    "dataType": {
+                        "type": "dataType",
+                        "value": {
+                            "x": "float64",
+                            "y": "float64",
+                            "z": "float64"
+                        }
                     }
                 }
             },
-            "location": {
-                "type": "geo:json",
+            "linear": {
+                "type": "geometry_msgs%2FVector3",
                 "value": {
-                    "type": "Point",
-                    "coordinates": [13.3986, 52.5547]
-                 }
-            },
-            "name": {
-                "type": "Text",
-                "value": "Bösebrücke Einkauf"
+                    "x": {
+                        "value": 1,
+                        "type": "number"
+                    },
+                    "y": {
+                        "value": 0,
+                        "type": "number"
+                    },
+                    "z": {
+                        "value": 0,
+                        "type": "number"
+                    }
+                },
+                "metadata": {
+                    "dataType": {
+                        "type": "dataType",
+                        "value": {
+                            "x": "float64",
+                            "y": "float64",
+                            "z": "float64"
+                        }
+                    }
+                }
             }
         }
     headers = {"Content-Type": "application/json"}
-    r = requests.post(server, data=json.dumps(data), headers=headers)
+    r = requests.post(server_create, data=json.dumps(data), headers=headers)
     print(r.status_code)
     request_status("post", r.status_code)
 
@@ -120,7 +149,7 @@ def update():
             ]
         }
     headers = {"Content-Type": "application/json"}
-    r = requests.post(server, data=json.dumps(data), headers=headers)
+    r = requests.post(server_update, data=json.dumps(data), headers=headers)
     print(r.status_code)
     #request_status("post", r.status_code)
 
